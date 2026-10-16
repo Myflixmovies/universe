@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07172f">
+<title>LEGACY — Marvel × DC Movie Universe</title>
+<style>
+:root{
+  --navy:#08090c;--navy-2:#121318;--navy-3:#292b33;--gold:#f02b3a;
+  --gold-light:#ff6570;--white:#f7f7f9;--muted:#b4b5bd;--line:rgba(240,43,58,.28);
+  --glass:rgba(18,19,24,.88);--radius:22px;--shadow:0 22px 60px rgba(0,0,0,.24)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{margin:0;background:var(--navy);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 15% 0%,rgba(240,43,58,.18),transparent 42%),radial-gradient(ellipse at 90% 55%,rgba(240,43,58,.08),transparent 36%)}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold-light);outline-offset:3px}
+.skip-link{position:absolute;left:-9999px;top:8px;background:var(--gold);color:var(--navy);padding:10px 14px;z-index:100}
+.skip-link:focus{left:12px}
+.nav{position:sticky;top:0;z-index:30;background:rgba(7,23,47,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1280px;margin:auto;padding:15px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.17em;font-size:1.05rem}
+.brand-mark{width:34px;height:34px;border:1px solid var(--gold);border-radius:11px;display:grid;place-items:center;color:var(--gold);font-size:.85rem;transform:rotate(-5deg)}
+.brand span:last-child{color:var(--gold)}
+.nav-links{display:flex;gap:8px}
+.nav-links a{padding:10px 15px;border-radius:999px;color:var(--muted);font-size:.92rem;transition:background .2s,color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--white);background:rgba(240,43,58,.12)}
+main{width:100%;max-width:1280px;margin:auto;padding:0 28px}
+.hero{min-height:360px;padding:75px 0 65px;display:grid;grid-template-columns:1fr;align-items:center;gap:36px;position:relative;overflow:hidden}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:.75rem;letter-spacing:.2em;font-weight:800;text-transform:uppercase}
+.eyebrow:before{content:"";height:1px;width:28px;background:var(--gold)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(2.7rem,6vw,5.7rem);line-height:.98;letter-spacing:-.055em;margin:19px 0 22px;max-width:760px}
+h1 em{font-style:normal;color:var(--gold)}
+.hero-copy{color:var(--muted);max-width:560px;font-size:1.05rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+.btn{border:1px solid transparent;border-radius:999px;padding:12px 18px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline{border-color:var(--line);color:var(--white);background:rgba(255,255,255,.025)}
+.btn-outline:hover{border-color:var(--gold);background:rgba(231,189,103,.08)}
+.hero-art{min-height:300px;position:relative;display:grid;place-items:center}
+.hero-orbit{position:absolute;width:min(100%,390px);aspect-ratio:1;border:1px solid rgba(240,43,58,.22);border-radius:50%;animation:orbit 32s linear infinite}
+.hero-orbit:before,.hero-orbit:after{content:"";position:absolute;border:1px solid rgba(240,43,58,.12);border-radius:50%;inset:12%}
+.hero-orbit:after{inset:25%}
+.hero-emblem{position:relative;width:190px;height:230px;display:grid;place-items:center;color:var(--gold);font-weight:950;font-size:5rem;letter-spacing:-.12em;text-shadow:0 0 45px rgba(240,43,58,.22);transform:skew(-5deg)}
+.hero-emblem:before{content:"";position:absolute;inset:0;border:2px solid var(--gold);clip-path:polygon(12% 0,88% 0,100% 15%,90% 85%,50% 100%,10% 85%,0 15%);background:linear-gradient(145deg,rgba(240,43,58,.12),transparent 65%)}
+.hero-emblem span{position:relative}
+.hero-note{position:absolute;bottom:6%;right:0;color:var(--muted);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.section{padding:58px 0 75px;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
+.section-head h2{font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.04em;margin:8px 0 7px}
+.section-head p{color:var(--muted);margin-bottom:0;max-width:590px}
+.section-number{font-size:.72rem;letter-spacing:.2em;color:var(--gold);font-weight:800}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 28px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted);border-radius:999px;padding:9px 16px;font-size:.9rem;transition:all .2s}
+.chip:hover{border-color:var(--gold);color:var(--white)}
+.chip.active{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:800}
+.movie-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.movie-card{min-width:0;background:linear-gradient(160deg,rgba(30,31,38,.96),rgba(8,9,12,.98));border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,.12);transition:transform .28s,border-color .28s,box-shadow .28s;animation:rise .45s both}
+.movie-card:hover{transform:translateY(-7px);border-color:rgba(240,43,58,.55);box-shadow:var(--shadow)}
+.poster-wrap{position:relative;aspect-ratio:2/3;background:linear-gradient(145deg,#292b33,#0b0c10);overflow:hidden}
+.poster-wrap img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s}
+.movie-card:hover .poster-wrap img{transform:scale(1.04)}
+.poster-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:22px;text-align:center;background:radial-gradient(circle at 50% 25%,rgba(240,43,58,.17),transparent 50%),linear-gradient(145deg,#3a1018,#08090c)}
+.poster-fallback strong{font-size:1.45rem;line-height:1.1;color:var(--gold);letter-spacing:-.04em}
+.poster-fallback span{display:block;margin-top:9px;font-size:.7rem;letter-spacing:.2em;color:var(--muted)}
+.status{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:999px;background:var(--gold);color:var(--navy);font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;font-weight:900}
+.status.released{background:rgba(7,23,47,.88);border:1px solid var(--line);color:var(--gold)}
+.franchise-tag{position:absolute;right:12px;top:12px;padding:6px 9px;border-radius:999px;background:rgba(7,23,47,.85);border:1px solid rgba(255,255,255,.13);font-size:.68rem;font-weight:800}
+.card-body{padding:17px}
+.card-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--gold);font-size:.76rem;font-weight:750;margin-bottom:9px}
+.card-body h3{font-size:1.15rem;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+.card-body p{font-size:.86rem;color:var(--muted);margin:0 0 16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4em}
+.card-actions{display:flex;gap:8px;align-items:center}
+.card-actions .btn{padding:10px 12px;font-size:.82rem;width:100%}
+.empty-state,.notice{padding:26px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);background:rgba(255,255,255,.02)}
+.tools-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0}
+.search-wrap{flex:1;min-width:0;position:relative}
+.search-wrap input{width:100%;padding:13px 16px 13px 43px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:var(--white)}
+.search-wrap input::placeholder{color:#899bb5}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gold)}
+.select{padding:12px 15px;border:1px solid var(--line);border-radius:999px;background:var(--navy-2);color:var(--white)}
+.results-label{font-size:.83rem;color:var(--muted);margin:0 0 17px}
+.loading{display:flex;align-items:center;gap:12px;color:var(--muted);padding:25px 0}
+.spinner{width:22px;height:22px;border:2px solid rgba(240,43,58,.25);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+.load-row{display:flex;justify-content:center;margin-top:30px}
+.details-modal{position:fixed;inset:0;z-index:80;background:rgba(1,8,19,.82);backdrop-filter:blur(10px);display:none;place-items:center;padding:20px}
+.details-modal.open{display:grid}
+.modal-panel{position:relative;width:min(780px,100%);max-height:min(86vh,900px);overflow:auto;background:linear-gradient(150deg,#251016,#08090c);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:25px}
+.modal-close{position:absolute;right:15px;top:15px;border:1px solid var(--line);background:rgba(7,23,47,.8);color:var(--white);width:40px;height:40px;border-radius:50%;font-size:1.2rem}
+.modal-content{display:grid;grid-template-columns:210px 1fr;gap:25px;padding-top:18px}
+.modal-poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:15px;background:var(--navy-3)}
+.modal-content h2{font-size:2rem;line-height:1.05;letter-spacing:-.04em;margin:10px 0}
+.modal-detail-line{color:var(--gold);font-size:.85rem;margin-bottom:13px}
+.modal-plot{color:var(--muted)}
+.modal-facts{display:grid;gap:8px;font-size:.88rem;margin:18px 0}
+.modal-facts strong{color:var(--gold);font-weight:750}
+.back-top{position:fixed;right:22px;bottom:22px;z-index:25;width:47px;height:47px;border-radius:50%;border:1px solid var(--line);background:var(--gold);color:var(--navy);font-size:1.2rem;font-weight:900;box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translateY(8px);transition:all .2s}
+.back-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+footer{border-top:1px solid var(--line);padding:25px 28px;text-align:center;color:var(--muted);font-size:.8rem}
+footer strong{color:var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.movie-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr .65fr}.hero-emblem{transform:scale(.85) skew(-5deg)}}
+@media(max-width:720px){.nav-inner{gap:8px}.brand{letter-spacing:.08em}.nav-links{flex-shrink:0}main{width:100%;padding:0 14px}.nav-inner{padding:12px 18px}.brand{font-size:.9rem}.nav-links a{padding:9px 11px;font-size:.82rem}.hero{grid-template-columns:1fr;padding:55px 0 45px;min-height:unset}.hero-art{display:none}.section{padding:43px 0 55px}.section-head{display:block}.section-head p{margin-top:8px}.movie-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card-body{padding:13px}.card-body h3{font-size:1rem}.card-body p{font-size:.8rem}.card-actions .btn{font-size:.76rem;padding:9px 7px}.modal-content{grid-template-columns:115px 1fr;gap:15px}.modal-panel{padding:18px}.modal-content h2{font-size:1.5rem}}
+@media(max-width:390px){.nav-inner{padding:10px 12px}.brand{font-size:.76rem;gap:7px}.brand-mark{width:29px;height:29px}.nav-links a{padding:8px 8px;font-size:.74rem}.tools-row{gap:9px}.tools-row>.btn{padding:11px 13px}.movie-grid{grid-template-columns:1fr 1fr;gap:9px}.card-body{padding:10px}.poster-wrap{aspect-ratio:2/3}.card-body p{min-height:0;-webkit-line-clamp:2}.franchise-tag,.status{font-size:.58rem;padding:5px 7px}.modal-content{grid-template-columns:1fr}.modal-poster{width:120px}.nav-links{gap:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#upcoming">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#upcoming" aria-label="Legacy home"><span class="brand-mark">L</span> LEGACY <span>UNIVERSE</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#upcoming">Upcoming</a><a href="#released">Released Movies</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="hero" aria-label="Marvel and DC movie universe introduction">
+    <div>
+      <div class="eyebrow">Two worlds. One universe.</div>
+      <h1>Legends are<br>made on the <em>big screen.</em></h1>
+      <p class="hero-copy">Your cinematic destination for the next era of Marvel and DC — from the stories on the horizon to the adventures worth revisiting.</p>
+      <div class="hero-actions"><a class="btn btn-gold" href="#upcoming">Explore upcoming <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#released">Browse released titles</a></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Edit UPCOMING_TITLES below in JavaScript to maintain your own schedule. -->
+  <section class="section" id="upcoming" aria-labelledby="upcoming-heading">
+    <div class="section-head"><div><div class="section-number">01 / WHAT'S NEXT</div><h2 id="upcoming-heading">Upcoming <span style="color:var(--gold)">premieres</span></h2><p>Upcoming movies and series, curated by you. Release details below are manually maintained in this file.</p></div></div>
+    <div class="filters" role="group" aria-label="Filter upcoming titles">
+      <button class="chip active" data-up-filter="All" aria-pressed="true">All</button>
+      <button class="chip" data-up-filter="Marvel" aria-pressed="false">Marvel</button>
+      <button class="chip" data-up-filter="DC" aria-pressed="false">DC</button>
+    </div>
+    <div id="upcoming-grid" class="movie-grid" aria-live="polite"></div>
+  </section>
+
+  <!-- SECTION 2: Search the OMDb catalogue for any movie or series. -->
+  <section class="section" id="released" aria-labelledby="released-heading">
+    <div class="section-head">
+      <div>
+        <div class="section-number">02 / DISCOVER</div>
+        <h2 id="released-heading">Find a <span style="color:var(--gold)">movie</span></h2>
+        <p>Search for any movie or series by title. Results and posters are fetched from OMDb.</p>
+      </div>
+    </div>
+    <form id="movie-search-form" class="tools-row" role="search">
+      <label class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="released-search" type="search" placeholder="Search any movie or series…" aria-label="Search any movie or series" autocomplete="off" required>
+      </label>
+      <button class="btn btn-gold" type="submit">Search <span aria-hidden="true">↗</span></button>
+    </form>
+    <p id="released-status" class="results-label" aria-live="polite">Enter a title to find movies and series.</p>
+    <div id="released-loading" class="loading" hidden><span class="spinner" aria-hidden="true"></span><span>Searching the movie universe…</span></div>
+    <div id="released-grid" class="movie-grid" aria-live="polite"></div>
+    <div id="released-empty" class="empty-state" hidden></div>
+    <div class="load-row"><button id="load-more" class="btn btn-outline" hidden>Load more results ↓</button></div>
+  </section>
+</main>
+<footer><strong>LEGACY UNIVERSE</strong> · Fan-made discovery interface. Not affiliated with Marvel, DC, or OMDb.</footer>
+<button id="back-top" class="back-top" aria-label="Back to top" title="Back to top">↑</button>
+
+<div id="details-modal" class="details-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-panel">
+    <button id="modal-close" class="modal-close" aria-label="Close details">×</button>
+    <div id="modal-content" class="modal-content"></div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   EDIT THIS ARRAY to add, remove, or change upcoming titles.
+   Fields: title, franchise ("Marvel" or "DC"), kind, releaseDate,
+   status ("Upcoming" or "Released"), description, poster, trailer.
+   Dates and links are manually maintained — not from OMDb.
+   ========================================================== */
+const UPCOMING_TITLES = [
+  {
+    title: "Avengers: Doomsday", franchise: "Marvel", kind: "Movie",
+    releaseDate: "December 18, 2026", status: "Upcoming",
+    description: "The Avengers and their allies face a new threat in the next chapter of the Marvel saga.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-avengers-doomsday.jpg",
+    trailer: "https://www.youtube.com/results?search_query=Avengers+Doomsday+official+trailer"
+  },
+  {
+    title: "Spider-Man: Brand New Day", franchise: "Marvel", kind: "Movie",
+    releaseDate: "July 31, 2026", status: "Released",
+    description: "Peter Parker begins a new chapter as Spider-Man in a changed New York.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-spider-man-brand-new-day.jpg",
+    trailer: "https://www.youtube.com/results?search_query=Spider-Man+Brand+New+Day+official+trailer"
+  },
+  {
+    title: "Supergirl", franchise: "DC", kind: "Movie",
+    releaseDate: "June 26, 2026", status: "Released",
+    description: "Kara Zor-El sets out on a cosmic journey that tests her strength and convictions.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-supergirl.jpg",
+    trailer: "https://www.youtube.com/results?search_query=Supergirl+2026+official+trailer"
+  },
+  {
+    title: "Lanterns", franchise: "DC", kind: "Series",
+    releaseDate: "2026", status: "Upcoming",
+    description: "Two Green Lanterns investigate a mystery with consequences far beyond Earth.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-lanterns.jpg",
+    trailer: "https://www.youtube.com/results?search_query=DC+Lanterns+series+official+trailer"
+  },
+  {
+    title: "The Batman Part II", franchise: "DC", kind: "Movie",
+    releaseDate: "October 1, 2027", status: "Upcoming",
+    description: "Gotham's Dark Knight returns for another chapter in the crime saga.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-batman-part-two.jpg",
+    trailer: "https://www.youtube.com/results?search_query=The+Batman+Part+II+official+trailer"
+  },
+  {
+    title: "Avengers: Secret Wars", franchise: "Marvel", kind: "Movie",
+    releaseDate: "December 17, 2027", status: "Upcoming",
+    description: "Marvel's multiverse saga builds toward an epic Avengers event.",
+    poster: "https://image.tmdb.org/t/p/w500/placeholder-secret-wars.jpg",
+    trailer: "https://www.youtube.com/results?search_query=Avengers+Secret+Wars+official+trailer"
+  }
+];
+
+/* ==========================================================
+   OMDb setup: paste your key between the quotes below.
+   Example: const OMDB_API_KEY = "your_actual_key";
+   A key embedded in a public HTML file can be viewed by anyone.
+   For personal/local use this is fine; don't publish your key.
+   ========================================================== */
+const OMDB_API_KEY = "1aab50ce";
+const OMDB_BASE = "https://www.omdbapi.com/";
+
+const state = {
+  upcomingFilter: "All",
+  results: [],
+  shown: 0,
+  page: 1,
+  query: "",
+  loading: false,
+  lastSearch: ""
+};
+const $ = (s) => document.querySelector(s);
+const upcomingGrid = $("#upcoming-grid"), releasedGrid = $("#released-grid");
+const loadingEl = $("#released-loading"), statusEl = $("#released-status");
+const emptyEl = $("#released-empty"), loadMoreBtn = $("#load-more");
+
+function escapeHTML(value="") {
+  return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+function safeImage(url) {
+  return url && /^https?:\/\//i.test(url) && !/placeholder-/i.test(url) ? url : "";
+}
+function posterMarkup(url, title) {
+  const src = safeImage(url);
+  return `<div class="poster-wrap"><div class="poster-fallback"><div><strong>${escapeHTML(title)}</strong><span>LEGACY UNIVERSE</span></div></div>${src ? `<img loading="lazy" src="${escapeHTML(src)}" alt="${escapeHTML(title)} poster" onerror="this.remove()">` : ""}</div>`;
+}
+function renderUpcoming() {
+  const items = UPCOMING_TITLES.filter(item => state.upcomingFilter === "All" || item.franchise === state.upcomingFilter);
+  upcomingGrid.innerHTML = items.map(item => `
+    <article class="movie-card">
+      <div class="poster-wrap">
+        <div class="poster-fallback"><div><strong>${escapeHTML(item.title)}</strong><span>${escapeHTML(item.franchise)} · ${escapeHTML(item.kind)}</span></div></div>
+        ${safeImage(item.poster) ? `<img loading="lazy" src="${escapeHTML(item.poster)}" alt="${escapeHTML(item.title)} poster" onerror="this.remove()">` : ""}
+        <span class="status ${item.status === "Released" ? "released" : ""}">${escapeHTML(item.status)}</span>
+        <span class="franchise-tag">${escapeHTML(item.franchise)}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span>${escapeHTML(item.kind)}</span><span>${escapeHTML(item.releaseDate)}</span></div>
+        <h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.description)}</p>
+        <div class="card-actions"><a class="btn btn-gold" href="${escapeHTML(item.trailer)}" target="_blank" rel="noopener noreferrer">Watch trailer ↗</a></div>
+      </div>
+    </article>`).join("");
+  if (!items.length) upcomingGrid.innerHTML = '<div class="empty-state">No titles match this filter yet. Add one in <code>UPCOMING_TITLES</code>.</div>';
+}
+document.querySelectorAll("[data-up-filter]").forEach(btn => btn.addEventListener("click", () => {
+  state.upcomingFilter = btn.dataset.upFilter;
+  document.querySelectorAll("[data-up-filter]").forEach(b => {const active=b===btn;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active));});
+  renderUpcoming();
+}));
+
+function isKeyMissing() {
+  return !OMDB_API_KEY || OMDB_API_KEY === "PASTE_YOUR_OMDB_API_KEY_HERE";
+}
+async function omdb(params) {
+  const url = new URL(OMDB_BASE);
+  url.search = new URLSearchParams({...params, apikey:OMDB_API_KEY}).toString();
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Network error (${response.status})`);
+  const data = await response.json();
+  if (data.Response === "False") {
+    if (/Invalid API key/i.test(data.Error || "")) throw new Error("OMDb rejected the API key. Check that it is activated.");
+    if (/limit/i.test(data.Error || "")) throw new Error("OMDb request limit reached. Please try again later.");
+    return null;
+  }
+  return data;
+}
+function setLoading(value) {
+  state.loading = value;
+  loadingEl.hidden = !value;
+  loadMoreBtn.disabled = value;
+  if (value) emptyEl.hidden = true;
+}
+function posterMarkup(url, title) {
+  const src = safeImage(url);
+  return `<div class="poster-wrap"><div class="poster-fallback"><div><strong>${escapeHTML(title)}</strong><span>LEGACY UNIVERSE</span></div></div>${src ? `<img loading="lazy" src="${escapeHTML(src)}" alt="${escapeHTML(title)} poster" onerror="this.remove()">` : ""}</div>`;
+}
+function renderReleased() {
+  const visible = state.results.slice(0, state.shown);
+  releasedGrid.innerHTML = visible.map(item => `
+    <article class="movie-card">
+      <button class="poster-button" data-detail-id="${escapeHTML(item.imdbID)}" aria-label="View details for ${escapeHTML(item.Title)}" style="display:block;width:100%;padding:0;border:0;text-align:left;background:transparent;color:inherit">
+        ${posterMarkup(item.Poster, item.Title)}
+      </button>
+      <div class="card-body">
+        <div class="card-meta"><span>${escapeHTML(item.Year || "Year n/a")}</span><span>${item.imdbRating && item.imdbRating !== "N/A" ? `★ ${escapeHTML(item.imdbRating)}` : escapeHTML((item.Type || "title").toUpperCase())}</span></div>
+        <h3>${escapeHTML(item.Title)}</h3>
+        <p>${escapeHTML(item.Plot && item.Plot !== "N/A" ? item.Plot : "Open the title to view available details.")}</p>
+        <div class="card-actions"><button class="btn btn-outline detail-btn" data-detail-id="${escapeHTML(item.imdbID)}">View details ↗</button></div>
+      </div>
+    </article>`).join("");
+  loadMoreBtn.hidden = state.shown >= state.results.length || state.results.length === 0;
+  if (state.results.length) {
+    statusEl.textContent = `Showing ${visible.length} of ${state.results.length} results for “${state.lastSearch}”.`;
+    emptyEl.hidden = true;
+  } else if (!state.loading) {
+    emptyEl.hidden = false;
+    emptyEl.textContent = "No results found. Check the spelling or try another movie title.";
+  }
+  releasedGrid.querySelectorAll("[data-detail-id]").forEach(btn =>
+    btn.addEventListener("click", () => openDetails(btn.dataset.detailId))
+  );
+}
+async function searchMovies(query, nextPage = false) {
+  const term = query.trim();
+  if (!term || state.loading) return;
+  if (isKeyMissing()) {
+    emptyEl.hidden = false;
+    emptyEl.textContent = "Add your OMDb API key to the OMDB_API_KEY constant in this file.";
+    return;
+  }
+  if (!nextPage) {
+    state.query = term;
+    state.lastSearch = term;
+    state.page = 1;
+    state.shown = 0;
+    state.results = [];
+    releasedGrid.innerHTML = "";
+  }
+  setLoading(true);
+  statusEl.textContent = "Searching OMDb…";
+  try {
+    const data = await omdb({s: state.query, page: String(state.page), type: "movie"});
+    // OMDb's search endpoint returns at most 10 results per page. Series are also
+    // searched separately and combined so one search covers both formats.
+    const seriesData = await omdb({s: state.query, page: String(state.page), type: "series"});
+    const combined = [...(data?.Search || []), ...(seriesData?.Search || [])];
+    const unique = combined.filter((item, index, arr) =>
+      arr.findIndex(other => other.imdbID === item.imdbID) === index
+    );
+    state.results = nextPage ? [...state.results, ...unique] : unique;
+    state.shown = state.results.length;
+    state.page++;
+    setLoading(false);
+    renderReleased();
+    if (!state.results.length) {
+      statusEl.textContent = `No results for “${state.query}”.`;
+      emptyEl.hidden = false;
+    }
+  } catch (error) {
+    setLoading(false);
+    emptyEl.hidden = false;
+    emptyEl.textContent = error.message || "Could not connect to OMDb. Check your internet connection and try again.";
+    statusEl.textContent = "Search could not be completed.";
+  }
+}
+$("#movie-search-form").addEventListener("submit", event => {
+  event.preventDefault();
+  searchMovies($("#released-search").value, false);
+});
+loadMoreBtn.addEventListener("click", () => searchMovies(state.query, true));
+
+async function openDetails(id) {
+  let item = state.results.find(entry => entry.imdbID === id);
+  if (!item) return;
+  try {
+    const detail = await omdb({i: id, plot: "full"});
+    if (detail) item = {...item, ...detail};
+  } catch (_) { /* The search result can still be shown if details fail. */ }
+  const modal = $("#details-modal"), content = $("#modal-content");
+  const poster = safeImage(item.Poster);
+  content.innerHTML = `${poster ? `<img class="modal-poster" src="${escapeHTML(poster)}" alt="${escapeHTML(item.Title)} poster">` : `<div class="modal-poster poster-fallback"><strong>${escapeHTML(item.Title)}</strong></div>`}
+    <div><div class="eyebrow">${escapeHTML(item.Type || "Movie / Series")}</div>
+    <h2 id="modal-title">${escapeHTML(item.Title)}</h2>
+    <div class="modal-detail-line">${escapeHTML(item.Year || "Year n/a")} · ${escapeHTML(item.Runtime || "Runtime n/a")} · ★ ${escapeHTML(item.imdbRating || "N/A")}</div>
+    <p class="modal-plot">${escapeHTML(item.Plot && item.Plot !== "N/A" ? item.Plot : "No plot description is available from OMDb.")}</p>
+    <div class="modal-facts">
+      <div><strong>Genre</strong> · ${escapeHTML(item.Genre || "N/A")}</div>
+      <div><strong>Actors</strong> · ${escapeHTML(item.Actors || "N/A")}</div>
+      <div><strong>Director</strong> · ${escapeHTML(item.Director || "N/A")}</div>
+      <div><strong>Released</strong> · ${escapeHTML(item.Released || "N/A")}</div>
+      <div><strong>Rated</strong> · ${escapeHTML(item.Rated || "N/A")}</div>
+    </div>
+    <a class="btn btn-gold" href="https://www.imdb.com/title/${encodeURIComponent(item.imdbID)}/" target="_blank" rel="noopener noreferrer">More details ↗</a></div>`;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  $("#modal-close").focus();
+}
+function closeModal() {
+  const modal = $("#details-modal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+}
+$("#modal-close").addEventListener("click", closeModal);
+$("#details-modal").addEventListener("click", event => {
+  if (event.target.id === "details-modal") closeModal();
+});
+document.addEventListener("keydown", event => { if (event.key === "Escape") closeModal(); });
+const backTop = $("#back-top");
+window.addEventListener("scroll", () => backTop.classList.toggle("visible", window.scrollY > 450), {passive:true});
+backTop.addEventListener("click", () => window.scrollTo({
+  top: 0,
+  behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+}));
+
+renderUpcoming();
+</script>
+</body>
+</html>
